@@ -1,0 +1,2291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AllTools Hub - 30+ Online Tools</title>
+<meta name="description" content="Free online tools - AI, SEO, Image, Text, Calculator tools all in one place">
+<meta name="keywords" content="online tools, free tools, AI tools, SEO tools, image tools">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+/* ============ GLOBAL ============ */
+:root {
+  --primary: #4361ee;
+  --secondary: #7209b7;
+  --success: #06d6a0;
+  --danger: #ef233c;
+  --warning: #ffd60a;
+  --dark: #0f0e17;
+  --light: #f8f9fa;
+  --card-bg: #ffffff;
+  --text: #2b2d42;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f2ff;
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+/* ============ NAVBAR ============ */
+.navbar {
+  background: white;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.navbar-brand {
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-link {
+  font-weight: 500;
+  color: var(--text) !important;
+  padding: 8px 15px !important;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.nav-link:hover {
+  background: #f0f2ff;
+  color: var(--primary) !important;
+}
+
+/* ============ HERO ============ */
+.hero {
+  background: linear-gradient(135deg, #4361ee 0%, #7209b7 50%, #3a0ca3 100%);
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+.hero p { font-size: 1.2rem; opacity: 0.9; }
+.search-box {
+  background: white;
+  border-radius: 50px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  margin: 30px auto 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 16px;
+  padding: 8px;
+  color: var(--text);
+}
+.search-box i { color: #aaa; font-size: 18px; }
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.stat-item { text-align: center; }
+.stat-item h3 { font-size: 2rem; font-weight: 800; }
+.stat-item p { opacity: 0.8; }
+
+/* ============ CATEGORIES ============ */
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-title h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.section-title p { color: #666; font-size: 1.1rem; }
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 2px solid #ddd;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+  margin: 5px;
+}
+.category-pill:hover,
+.category-pill.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(67,97,238,0.3);
+}
+.category-pill i { font-size: 16px; }
+
+/* ============ TOOL CARDS ============ */
+.tool-card {
+  background: white;
+  border-radius: 16px;
+  padding: 25px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid transparent;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+.tool-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(67,97,238,0.15);
+  border-color: var(--primary);
+}
+.tool-icon-wrap {
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  font-size: 28px;
+  color: white;
+}
+.tool-card h5 {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.tool-card p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+.tool-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* ============ TOOL PAGE (MODAL) ============ */
+.tool-page {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.tool-page-content {
+  background: white;
+  border-radius: 20px;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 40px;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.tool-page-close {
+  position: absolute;
+  top: 15px; right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  transition: 0.3s;
+}
+.tool-page-close:hover { color: var(--danger); transform: rotate(90deg); }
+.tool-page-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f2ff;
+}
+.tool-page-header h3 { font-weight: 800; margin: 0; }
+.tool-page-header p { color: #666; margin: 5px 0 0; }
+
+/* ============ FORM ELEMENTS ============ */
+.form-control, .form-select {
+  border-radius: 10px;
+  border: 2px solid #e9ecef;
+  padding: 12px 15px;
+  transition: 0.3s;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67,97,238,0.1);
+}
+.btn-tool {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 30px;
+  font-weight: 700;
+  width: 100%;
+  transition: 0.3s;
+}
+.btn-tool:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(67,97,238,0.4);
+  color: white;
+}
+.result-box {
+  background: #f0f2ff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  border-left: 4px solid var(--primary);
+  display: none;
+}
+
+/* ============ ADS ============ */
+.ad-container {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  margin: 30px 0;
+  border: 1px dashed #ddd;
+}
+.ad-label {
+  font-size: 11px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+/* ============ FEATURES ============ */
+.feature-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  transition: 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 35px;
+  color: white;
+}
+
+/* ============ FOOTER ============ */
+footer {
+  background: var(--dark);
+  color: white;
+  padding: 60px 0 30px;
+  margin-top: 60px;
+}
+footer h5 {
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: white;
+}
+footer a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+footer a:hover { color: white; padding-left: 5px; }
+.social-icons a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+.social-icons a:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* ============ BACK TO TOP ============ */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(67,97,238,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  z-index: 999;
+}
+.back-to-top:hover { transform: translateY(-3px); }
+
+/* ============ DARK MODE ============ */
+body.dark-mode {
+  background: #0d0d1a;
+  color: #e0e0e0;
+}
+body.dark-mode .navbar { background: #1a1a2e; }
+body.dark-mode .tool-card { background: #1a1a2e; color: #e0e0e0; }
+body.dark-mode .category-pill { background: #1a1a2e; color: #e0e0e0; border-color: #333; }
+body.dark-mode .tool-page-content { background: #1a1a2e; color: #e0e0e0; }
+body.dark-mode .form-control { background: #0d0d1a; color: #e0e0e0; border-color: #333; }
+body.dark-mode .result-box { background: #0d0d1a; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .tool-page-content { margin: 10px; padding: 25px 20px; }
+  .stats { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <i class="fas fa-tools me-2"></i>AllTools Hub
+    </a>
+    <div class="d-flex align-items-center gap-2 d-lg-none">
+      <button class="btn btn-sm" onclick="toggleDark()">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-home me-1"></i>Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tools"><i class="fas fa-wrench me-1"></i>All Tools</a></li>
+        <li class="nav-item"><a class="nav-link" href="#ai-tools"><i class="fas fa-robot me-1"></i>AI Tools</a></li>
+        <li class="nav-item"><a class="nav-link" href="#seo-tools"><i class="fas fa-search me-1"></i>SEO Tools</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i>About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+      </ul>
+      <div class="d-none d-lg-flex align-items-center gap-2">
+        <button class="btn btn-outline-primary rounded-pill px-3" onclick="toggleDark()">
+          <i class="fas fa-moon"></i> Dark Mode
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="container">
+    <h1><i class="fas fa-tools me-3"></i>AllTools Hub</h1>
+    <p>30+ Free Online Tools - AI, SEO, Image, Text & More in One Place</p>
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search for a tool..." onkeyup="searchTools()">
+    </div>
+    <div class="stats">
+      <div class="stat-item">
+        <h3>30+</h3><p>Tools Available</p>
+      </div>
+      <div class="stat-item">
+        <h3>100%</h3><p>Free Forever</p>
+      </div>
+      <div class="stat-item">
+        <h3>6</h3><p>Categories</p>
+      </div>
+      <div class="stat-item">
+        <h3>Fast</h3><p>& Secure</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOP AD ============ -->
+<div class="container mt-4">
+  <div class="ad-container">
+    <div class="ad-label">Advertisement</div>
+    <!-- Adsterra 728x90 Code Here -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="YOUR-AD-CLIENT" data-ad-slot="YOUR-AD-SLOT" data-ad-format="auto"></ins>
+  </div>
+</div>
+
+<!-- ============ CATEGORIES ============ -->
+<section class="container py-5" id="tools">
+  <div class="section-title">
+    <h2>Choose Category</h2>
+    <p>Find the right tool for your needs</p>
+  </div>
+  <div class="text-center mb-4">
+    <span class="category-pill active" onclick="filterTools('all', this)">
+      <i class="fas fa-th"></i> All Tools
+    </span>
+    <span class="category-pill" onclick="filterTools('ai', this)">
+      <i class="fas fa-robot"></i> AI Tools
+    </span>
+    <span class="category-pill" onclick="filterTools('seo', this)">
+      <i class="fas fa-chart-line"></i> SEO Tools
+    </span>
+    <span class="category-pill" onclick="filterTools('image', this)">
+      <i class="fas fa-image"></i> Image Tools
+    </span>
+    <span class="category-pill" onclick="filterTools('text', this)">
+      <i class="fas fa-font"></i> Text Tools
+    </span>
+    <span class="category-pill" onclick="filterTools('calc', this)">
+      <i class="fas fa-calculator"></i> Calculators
+    </span>
+    <span class="category-pill" onclick="filterTools('converter', this)">
+      <i class="fas fa-exchange-alt"></i> Converters
+    </span>
+  </div>
+
+  <!-- ============ TOOLS GRID ============ -->
+  <div class="row g-4" id="toolsGrid">
+
+    <!-- AI TOOLS -->
+    <div class="col-6 col-md-3 tool-item" data-cat="ai" data-name="AI Paragraph Generator">
+      <div class="tool-card" onclick="openTool('aiPara')">
+        <span class="tool-badge bg-primary text-white">AI</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4361ee,#7209b7)">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h5>AI Paragraph Generator</h5>
+        <p>Generate content with AI</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="ai" data-name="AI Summarizer">
+      <div class="tool-card" onclick="openTool('aiSummarize')">
+        <span class="tool-badge bg-primary text-white">AI</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4361ee,#7209b7)">
+          <i class="fas fa-compress-alt"></i>
+        </div>
+        <h5>AI Summarizer</h5>
+        <p>Summarize any text with AI</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="ai" data-name="AI Email Writer">
+      <div class="tool-card" onclick="openTool('aiEmail')">
+        <span class="tool-badge bg-primary text-white">AI</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4361ee,#7209b7)">
+          <i class="fas fa-envelope-open-text"></i>
+        </div>
+        <h5>AI Email Writer</h5>
+        <p>Write professional emails</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="ai" data-name="AI Paraphraser">
+      <div class="tool-card" onclick="openTool('aiPara2')">
+        <span class="tool-badge bg-primary text-white">AI</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4361ee,#7209b7)">
+          <i class="fas fa-sync-alt"></i>
+        </div>
+        <h5>AI Paraphraser</h5>
+        <p>Rewrite text differently</p>
+      </div>
+    </div>
+
+    <!-- SEO TOOLS -->
+    <div class="col-6 col-md-3 tool-item" data-cat="seo" data-name="Meta Tag Generator">
+      <div class="tool-card" onclick="openTool('metaGen')">
+        <span class="tool-badge bg-success text-white">SEO</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75)">
+          <i class="fas fa-tags"></i>
+        </div>
+        <h5>Meta Tag Generator</h5>
+        <p>Generate SEO meta tags</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="seo" data-name="Keyword Density Checker">
+      <div class="tool-card" onclick="openTool('keyDensity')">
+        <span class="tool-badge bg-success text-white">SEO</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75)">
+          <i class="fas fa-key"></i>
+        </div>
+        <h5>Keyword Density</h5>
+        <p>Check keyword density</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="seo" data-name="URL Slug Generator">
+      <div class="tool-card" onclick="openTool('slugGen')">
+        <span class="tool-badge bg-success text-white">SEO</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75)">
+          <i class="fas fa-link"></i>
+        </div>
+        <h5>URL Slug Generator</h5>
+        <p>Create SEO-friendly URLs</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="seo" data-name="Robots.txt Generator">
+      <div class="tool-card" onclick="openTool('robotsGen')">
+        <span class="tool-badge bg-success text-white">SEO</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75)">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h5>Robots.txt Generator</h5>
+        <p>Generate robots.txt file</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="seo" data-name="Sitemap Generator">
+      <div class="tool-card" onclick="openTool('sitemapGen')">
+        <span class="tool-badge bg-success text-white">SEO</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75)">
+          <i class="fas fa-sitemap"></i>
+        </div>
+        <h5>Sitemap Generator</h5>
+        <p>Create XML sitemap</p>
+      </div>
+    </div>
+
+    <!-- IMAGE TOOLS -->
+    <div class="col-6 col-md-3 tool-item" data-cat="image" data-name="Image Compressor">
+      <div class="tool-card" onclick="openTool('imgCompress')">
+        <span class="tool-badge bg-warning text-dark">Image</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e)">
+          <i class="fas fa-compress"></i>
+        </div>
+        <h5>Image Compressor</h5>
+        <p>Reduce image file size</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="image" data-name="Image Resizer">
+      <div class="tool-card" onclick="openTool('imgResize')">
+        <span class="tool-badge bg-warning text-dark">Image</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e)">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </div>
+        <h5>Image Resizer</h5>
+        <p>Resize images easily</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="image" data-name="PNG to JPG">
+      <div class="tool-card" onclick="openTool('pngJpg')">
+        <span class="tool-badge bg-warning text-dark">Image</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e)">
+          <i class="fas fa-file-image"></i>
+        </div>
+        <h5>PNG to JPG</h5>
+        <p>Convert PNG to JPG format</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="image" data-name="Image to PDF">
+      <div class="tool-card" onclick="openTool('imgPdf')">
+        <span class="tool-badge bg-warning text-dark">Image</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e)">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <h5>Image to PDF</h5>
+        <p>Convert image to PDF</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="image" data-name="QR Code Generator">
+      <div class="tool-card" onclick="openTool('qrGen')">
+        <span class="tool-badge bg-warning text-dark">Image</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e)">
+          <i class="fas fa-qrcode"></i>
+        </div>
+        <h5>QR Code Generator</h5>
+        <p>Generate & download QR codes</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="image" data-name="Watermark Tool">
+      <div class="tool-card" onclick="openTool('watermark')">
+        <span class="tool-badge bg-warning text-dark">Image</span>
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e)">
+          <i class="fas fa-stamp"></i>
+        </div>
+        <h5>Watermark Tool</h5>
+        <p>Add watermark to images</p>
+      </div>
+    </div>
+
+    <!-- TEXT TOOLS -->
+    <div class="col-6 col-md-3 tool-item" data-cat="text" data-name="Word Counter">
+      <div class="tool-card" onclick="openTool('wordCount')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4cc9f0,#4895ef)">
+          <i class="fas fa-spell-check"></i>
+        </div>
+        <h5>Word Counter</h5>
+        <p>Count words and characters</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="text" data-name="Case Converter">
+      <div class="tool-card" onclick="openTool('caseConvert')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4cc9f0,#4895ef)">
+          <i class="fas fa-font"></i>
+        </div>
+        <h5>Case Converter</h5>
+        <p>Convert text case</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="text" data-name="Text to Speech">
+      <div class="tool-card" onclick="openTool('tts')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4cc9f0,#4895ef)">
+          <i class="fas fa-volume-up"></i>
+        </div>
+        <h5>Text to Speech</h5>
+        <p>Convert text to audio</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="text" data-name="Lorem Ipsum Generator">
+      <div class="tool-card" onclick="openTool('lorem')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4cc9f0,#4895ef)">
+          <i class="fas fa-paragraph"></i>
+        </div>
+        <h5>Lorem Ipsum</h5>
+        <p>Generate placeholder text</p>
+      </div>
+    </div>
+
+    <!-- CALCULATORS -->
+    <div class="col-6 col-md-3 tool-item" data-cat="calc" data-name="BMI Calculator">
+      <div class="tool-card" onclick="openTool('bmiCalc')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c)">
+          <i class="fas fa-weight"></i>
+        </div>
+        <h5>BMI Calculator</h5>
+        <p>Calculate Body Mass Index</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="calc" data-name="Age Calculator">
+      <div class="tool-card" onclick="openTool('ageCalc')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c)">
+          <i class="fas fa-birthday-cake"></i>
+        </div>
+        <h5>Age Calculator</h5>
+        <p>Calculate exact age</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="calc" data-name="EMI Calculator">
+      <div class="tool-card" onclick="openTool('emiCalc')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c)">
+          <i class="fas fa-rupee-sign"></i>
+        </div>
+        <h5>EMI Calculator</h5>
+        <p>Calculate loan EMI</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="calc" data-name="GST Calculator">
+      <div class="tool-card" onclick="openTool('gstCalc')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c)">
+          <i class="fas fa-percent"></i>
+        </div>
+        <h5>GST Calculator</h5>
+        <p>Calculate GST amount</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="calc" data-name="Percentage Calculator">
+      <div class="tool-card" onclick="openTool('percentCalc')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c)">
+          <i class="fas fa-calculator"></i>
+        </div>
+        <h5>Percentage Calculator</h5>
+        <p>Calculate percentages</p>
+      </div>
+    </div>
+
+    <!-- CONVERTERS -->
+    <div class="col-6 col-md-3 tool-item" data-cat="converter" data-name="Unit Converter">
+      <div class="tool-card" onclick="openTool('unitConv')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060)">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <h5>Unit Converter</h5>
+        <p>Convert KM, Miles, etc.</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="converter" data-name="HEX to RGB">
+      <div class="tool-card" onclick="openTool('hexRgb')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060)">
+          <i class="fas fa-palette"></i>
+        </div>
+        <h5>HEX to RGB</h5>
+        <p>Convert color codes</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="converter" data-name="Base64 Encoder">
+      <div class="tool-card" onclick="openTool('base64')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060)">
+          <i class="fas fa-code"></i>
+        </div>
+        <h5>Base64 Encoder</h5>
+        <p>Encode/Decode Base64</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="converter" data-name="Binary Decimal">
+      <div class="tool-card" onclick="openTool('binaryDec')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060)">
+          <i class="fas fa-terminal"></i>
+        </div>
+        <h5>Binary to Decimal</h5>
+        <p>Convert binary numbers</p>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3 tool-item" data-cat="converter" data-name="Password Generator">
+      <div class="tool-card" onclick="openTool('passGen')">
+        <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060)">
+          <i class="fas fa-lock"></i>
+        </div>
+        <h5>Password Generator</h5>
+        <p>Create strong passwords</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MIDDLE AD -->
+<div class="container">
+  <div class="ad-container">
+    <div class="ad-label">Advertisement</div>
+    <!-- Adsterra 300x250 Code Here -->
+    <div style="min-height:250px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;border-radius:8px;">
+      <span style="color:#aaa;">Adsterra Ad 300x250</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FEATURES ============ -->
+<section class="container py-5" id="about">
+  <div class="section-title">
+    <h2>Why Choose AllTools Hub?</h2>
+    <p>Everything you need, all in one place</p>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#4361ee,#7209b7)">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h5>Lightning Fast</h5>
+        <p>All tools work instantly in your browser. No waiting, no loading.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#06d6a0,#1b9e75)">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h5>100% Secure</h5>
+        <p>Your data stays on your device. We never store your information.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#f72585,#b5179e)">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h5>Mobile Friendly</h5>
+        <p>Works perfectly on all devices - mobile, tablet, and desktop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM AD -->
+<div class="container">
+  <div class="ad-container">
+    <div class="ad-label">Advertisement</div>
+    <!-- Adsterra 728x90 Code Here -->
+    <div style="min-height:90px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;border-radius:8px;">
+      <span style="color:#aaa;">Adsterra Ad 728x90</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<section class="container py-5" id="contact">
+  <div class="section-title">
+    <h2>Contact Us</h2>
+    <p>Have questions? We're here to help</p>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="feature-card">
+        <input type="text" id="cName" class="form-control mb-3" placeholder="Your Name">
+        <input type="email" id="cEmail" class="form-control mb-3" placeholder="Your Email">
+        <textarea id="cMsg" class="form-control mb-3" rows="4" placeholder="Your Message"></textarea>
+        <button class="btn-tool btn" onclick="sendContact()">
+          <i class="fas fa-paper-plane me-2"></i>Send Message
+        </button>
+        <p id="contactResult" class="mt-3 text-success"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5><i class="fas fa-tools me-2"></i>AllTools Hub</h5>
+        <p style="color:rgba(255,255,255,0.7)">Your one-stop destination for all online tools. Free, fast, and secure.</p>
+        <div class="social-icons mt-3">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-md-2 mb-4">
+        <h5>Tools</h5>
+        <a href="#" onclick="openTool('aiPara')">AI Writer</a>
+        <a href="#" onclick="openTool('qrGen')">QR Generator</a>
+        <a href="#" onclick="openTool('bmiCalc')">BMI Calculator</a>
+        <a href="#" onclick="openTool('imgCompress')">Image Compressor</a>
+      </div>
+      <div class="col-md-2 mb-4">
+        <h5>Categories</h5>
+        <a href="#" onclick="filterTools('ai',null)">AI Tools</a>
+        <a href="#" onclick="filterTools('seo',null)">SEO Tools</a>
+        <a href="#" onclick="filterTools('image',null)">Image Tools</a>
+        <a href="#" onclick="filterTools('calc',null)">Calculators</a>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Legal</h5>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Disclaimer</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,0.1)">
+    <p class="text-center mb-0" style="color:rgba(255,255,255,0.6)">
+      © 2025 AllTools Hub. All Rights Reserved. Made with <i class="fas fa-heart text-danger"></i>
+    </p>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ===================== TOOL PAGES (MODALS) ===================== -->
+
+<!-- AI Paragraph -->
+<div class="tool-page" id="page-aiPara">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('aiPara')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4361ee,#7209b7);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-robot" style="color:white"></i>
+      </div>
+      <div>
+        <h3>AI Paragraph Generator</h3>
+        <p>Generate high-quality content using AI</p>
+      </div>
+    </div>
+    <div class="ad-container"><div class="ad-label">Ad</div>
+      <!-- Adsterra Ad -->
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Enter Topic</label>
+      <input type="text" id="aiParaInput" class="form-control" placeholder="e.g. Benefits of yoga">
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Tone</label>
+      <select id="aiTone" class="form-select">
+        <option>Professional</option>
+        <option>Casual</option>
+        <option>Creative</option>
+        <option>Academic</option>
+      </select>
+    </div>
+    <button class="btn-tool btn" onclick="runAIPara()">
+      <i class="fas fa-magic me-2"></i>Generate with AI
+    </button>
+    <div class="result-box" id="aiParaResult">
+      <h6>Generated Content:</h6>
+      <textarea class="form-control mt-2" rows="6" id="aiParaOutput"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('aiParaOutput')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Summarizer -->
+<div class="tool-page" id="page-aiSummarize">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('aiSummarize')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4361ee,#7209b7);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-compress-alt" style="color:white"></i>
+      </div>
+      <div><h3>AI Summarizer</h3><p>Summarize long text in seconds</p></div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Paste Text to Summarize</label>
+      <textarea id="aiSumInput" class="form-control" rows="6" placeholder="Paste your long text here..."></textarea>
+    </div>
+    <button class="btn-tool btn" onclick="runAISummarize()">
+      <i class="fas fa-compress-alt me-2"></i>Summarize
+    </button>
+    <div class="result-box" id="aiSumResult">
+      <h6>Summary:</h6>
+      <textarea class="form-control mt-2" rows="4" id="aiSumOutput"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('aiSumOutput')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Email Writer -->
+<div class="tool-page" id="page-aiEmail">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('aiEmail')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4361ee,#7209b7);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-envelope-open-text" style="color:white"></i>
+      </div>
+      <div><h3>AI Email Writer</h3><p>Write professional emails instantly</p></div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Email Purpose</label>
+      <input type="text" id="emailPurpose" class="form-control" placeholder="e.g. Job application for software developer">
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Tone</label>
+      <select id="emailTone" class="form-select">
+        <option>Formal</option>
+        <option>Friendly</option>
+        <option>Urgent</option>
+      </select>
+    </div>
+    <button class="btn-tool btn" onclick="runAIEmail()">
+      <i class="fas fa-magic me-2"></i>Write Email
+    </button>
+    <div class="result-box" id="aiEmailResult">
+      <h6>Generated Email:</h6>
+      <textarea class="form-control mt-2" rows="8" id="aiEmailOutput"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('aiEmailOutput')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Paraphraser -->
+<div class="tool-page" id="page-aiPara2">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('aiPara2')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4361ee,#7209b7);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-sync-alt" style="color:white"></i>
+      </div>
+      <div><h3>AI Paraphraser</h3><p>Rewrite text in a different way</p></div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Enter Text to Paraphrase</label>
+      <textarea id="paraInput" class="form-control" rows="5" placeholder="Enter text here..."></textarea>
+    </div>
+    <button class="btn-tool btn" onclick="runAIParaphrase()">
+      <i class="fas fa-sync-alt me-2"></i>Paraphrase
+    </button>
+    <div class="result-box" id="aiPara2Result">
+      <h6>Paraphrased Text:</h6>
+      <textarea class="form-control mt-2" rows="5" id="aiPara2Output"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('aiPara2Output')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Meta Generator -->
+<div class="tool-page" id="page-metaGen">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('metaGen')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-tags" style="color:white"></i>
+      </div>
+      <div><h3>Meta Tag Generator</h3><p>Generate perfect SEO meta tags</p></div>
+    </div>
+    <input type="text" id="metaTitle" class="form-control mb-3" placeholder="Page Title">
+    <input type="text" id="metaDesc" class="form-control mb-3" placeholder="Page Description">
+    <input type="text" id="metaKeys" class="form-control mb-3" placeholder="Keywords (comma separated)">
+    <input type="text" id="metaAuthor" class="form-control mb-3" placeholder="Author Name">
+    <button class="btn-tool btn" onclick="runMetaGen()">
+      <i class="fas fa-code me-2"></i>Generate Meta Tags
+    </button>
+    <div class="result-box" id="metaGenResult">
+      <textarea class="form-control" rows="8" id="metaGenOutput"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('metaGenOutput')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Keyword Density -->
+<div class="tool-page" id="page-keyDensity">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('keyDensity')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-key" style="color:white"></i>
+      </div>
+      <div><h3>Keyword Density Checker</h3><p>Analyze keyword usage in text</p></div>
+    </div>
+    <input type="text" id="kdKeyword" class="form-control mb-3" placeholder="Enter keyword">
+    <textarea id="kdText" class="form-control mb-3" rows="6" placeholder="Paste your content here..."></textarea>
+    <button class="btn-tool btn" onclick="runKeyDensity()">
+      <i class="fas fa-search me-2"></i>Check Density
+    </button>
+    <div class="result-box" id="keyDensityResult">
+      <p id="kdOutput" class="fw-bold fs-5"></p>
+    </div>
+  </div>
+</div>
+
+<!-- URL Slug -->
+<div class="tool-page" id="page-slugGen">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('slugGen')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-link" style="color:white"></i>
+      </div>
+      <div><h3>URL Slug Generator</h3><p>Create SEO-friendly URL slugs</p></div>
+    </div>
+    <input type="text" id="slugInput" class="form-control mb-3" placeholder="Enter page title">
+    <button class="btn-tool btn" onclick="runSlugGen()">
+      <i class="fas fa-link me-2"></i>Generate Slug
+    </button>
+    <div class="result-box" id="slugGenResult">
+      <p class="fw-bold" id="slugOutput"></p>
+      <button class="btn btn-outline-primary btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('slugOutput').innerText)">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Robots.txt -->
+<div class="tool-page" id="page-robotsGen">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('robotsGen')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-robot" style="color:white"></i>
+      </div>
+      <div><h3>Robots.txt Generator</h3><p>Generate robots.txt for your site</p></div>
+    </div>
+    <input type="text" id="robotsUrl" class="form-control mb-3" placeholder="Your website URL">
+    <button class="btn-tool btn" onclick="runRobots()">
+      <i class="fas fa-cog me-2"></i>Generate
+    </button>
+    <div class="result-box" id="robotsGenResult">
+      <textarea class="form-control" rows="6" id="robotsOutput"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('robotsOutput')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Sitemap -->
+<div class="tool-page" id="page-sitemapGen">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('sitemapGen')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#06d6a0,#1b9e75);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-sitemap" style="color:white"></i>
+      </div>
+      <div><h3>Sitemap Generator</h3><p>Generate XML sitemap</p></div>
+    </div>
+    <input type="text" id="sitemapUrl" class="form-control mb-3" placeholder="Website URL (e.g. https://example.com)">
+    <textarea id="sitemapPages" class="form-control mb-3" rows="5" placeholder="Enter pages (one per line)&#10;/about&#10;/contact&#10;/blog"></textarea>
+    <button class="btn-tool btn" onclick="runSitemap()">
+      <i class="fas fa-sitemap me-2"></i>Generate Sitemap
+    </button>
+    <div class="result-box" id="sitemapResult">
+      <textarea class="form-control" rows="8" id="sitemapOutput"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('sitemapOutput')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Image Compressor -->
+<div class="tool-page" id="page-imgCompress">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('imgCompress')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-compress" style="color:white"></i>
+      </div>
+      <div><h3>Image Compressor</h3><p>Reduce image size without quality loss</p></div>
+    </div>
+    <input type="file" id="compressFile" class="form-control mb-3" accept="image/*">
+    <label class="form-label fw-bold">Quality: <span id="qualityVal">60</span>%</label>
+    <input type="range" id="qualityRange" class="form-range mb-3" min="10" max="100" value="60" oninput="document.getElementById('qualityVal').innerText=this.value">
+    <button class="btn-tool btn" onclick="runCompress()">
+      <i class="fas fa-compress me-2"></i>Compress Image
+    </button>
+    <div class="result-box" id="imgCompressResult">
+      <img id="compressPreview" class="img-fluid rounded mb-3" style="max-height:200px">
+      <br>
+      <a id="compressDownload" class="btn btn-success">
+        <i class="fas fa-download me-2"></i>Download Compressed Image
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Image Resizer -->
+<div class="tool-page" id="page-imgResize">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('imgResize')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-expand-arrows-alt" style="color:white"></i>
+      </div>
+      <div><h3>Image Resizer</h3><p>Resize your images to any dimension</p></div>
+    </div>
+    <input type="file" id="resizeFile" class="form-control mb-3" accept="image/*">
+    <div class="row">
+      <div class="col-6">
+        <input type="number" id="resizeW" class="form-control mb-3" placeholder="Width (px)">
+      </div>
+      <div class="col-6">
+        <input type="number" id="resizeH" class="form-control mb-3" placeholder="Height (px)">
+      </div>
+    </div>
+    <button class="btn-tool btn" onclick="runResize()">
+      <i class="fas fa-expand-arrows-alt me-2"></i>Resize Image
+    </button>
+    <div class="result-box" id="imgResizeResult">
+      <img id="resizePreview" class="img-fluid rounded mb-3" style="max-height:200px">
+      <br>
+      <a id="resizeDownload" class="btn btn-success">
+        <i class="fas fa-download me-2"></i>Download Resized Image
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- PNG to JPG -->
+<div class="tool-page" id="page-pngJpg">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('pngJpg')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-file-image" style="color:white"></i>
+      </div>
+      <div><h3>PNG to JPG Converter</h3><p>Convert PNG images to JPG format</p></div>
+    </div>
+    <input type="file" id="pngFile" class="form-control mb-3" accept=".png">
+    <button class="btn-tool btn" onclick="runPngJpg()">
+      <i class="fas fa-exchange-alt me-2"></i>Convert to JPG
+    </button>
+    <div class="result-box" id="pngJpgResult">
+      <img id="pngPreview" class="img-fluid rounded mb-3" style="max-height:200px">
+      <br>
+      <a id="pngDownload" class="btn btn-success">
+        <i class="fas fa-download me-2"></i>Download JPG
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Image to PDF -->
+<div class="tool-page" id="page-imgPdf">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('imgPdf')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-file-pdf" style="color:white"></i>
+      </div>
+      <div><h3>Image to PDF</h3><p>Convert any image to PDF</p></div>
+    </div>
+    <input type="file" id="pdfImgFile" class="form-control mb-3" accept="image/*">
+    <button class="btn-tool btn" onclick="runImgPdf()">
+      <i class="fas fa-file-pdf me-2"></i>Convert to PDF
+    </button>
+    <div class="result-box" id="imgPdfResult">
+      <p class="text-success fw-bold"><i class="fas fa-check-circle me-2"></i>PDF created! Downloading...</p>
+    </div>
+  </div>
+</div>
+
+<!-- QR Code -->
+<div class="tool-page" id="page-qrGen">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('qrGen')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-qrcode" style="color:white"></i>
+      </div>
+      <div><h3>QR Code Generator</h3><p>Generate and download QR codes</p></div>
+    </div>
+    <input type="text" id="qrInput" class="form-control mb-3" placeholder="Enter text or URL">
+    <button class="btn-tool btn" onclick="runQR()">
+      <i class="fas fa-qrcode me-2"></i>Generate QR Code
+    </button>
+    <div class="result-box" id="qrGenResult" style="text-align:center">
+      <div id="qrOutput" class="mb-3"></div>
+      <a id="qrDl" class="btn btn-success">
+        <i class="fas fa-download me-2"></i>Download QR Code
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Watermark -->
+<div class="tool-page" id="page-watermark">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('watermark')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f72585,#b5179e);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-stamp" style="color:white"></i>
+      </div>
+      <div><h3>Watermark Tool</h3><p>Add text watermark to your images</p></div>
+    </div>
+    <input type="file" id="wmFile" class="form-control mb-3" accept="image/*">
+    <input type="text" id="wmText" class="form-control mb-3" placeholder="Watermark text">
+    <button class="btn-tool btn" onclick="runWatermark()">
+      <i class="fas fa-stamp me-2"></i>Add Watermark
+    </button>
+    <div class="result-box" id="watermarkResult">
+      <img id="wmPreview" class="img-fluid rounded mb-3" style="max-height:250px">
+      <br>
+      <a id="wmDownload" class="btn btn-success">
+        <i class="fas fa-download me-2"></i>Download Image
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Word Counter -->
+<div class="tool-page" id="page-wordCount">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('wordCount')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4cc9f0,#4895ef);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-spell-check" style="color:white"></i>
+      </div>
+      <div><h3>Word Counter</h3><p>Count words, characters, sentences</p></div>
+    </div>
+    <textarea id="wcInput" class="form-control mb-3" rows="8" placeholder="Type or paste text here..." oninput="runWordCount()"></textarea>
+    <div class="row g-3">
+      <div class="col-4">
+        <div class="result-box" style="display:block;text-align:center">
+          <h4 id="wcWords">0</h4><p class="mb-0">Words</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="result-box" style="display:block;text-align:center">
+          <h4 id="wcChars">0</h4><p class="mb-0">Characters</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="result-box" style="display:block;text-align:center">
+          <h4 id="wcSentences">0</h4><p class="mb-0">Sentences</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Case Converter -->
+<div class="tool-page" id="page-caseConvert">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('caseConvert')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4cc9f0,#4895ef);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-font" style="color:white"></i>
+      </div>
+      <div><h3>Case Converter</h3><p>Convert text to any case format</p></div>
+    </div>
+    <textarea id="caseInput" class="form-control mb-3" rows="5" placeholder="Enter text here..."></textarea>
+    <div class="row g-2">
+      <div class="col-6"><button class="btn btn-outline-primary w-100" onclick="runCase('upper')">UPPER CASE</button></div>
+      <div class="col-6"><button class="btn btn-outline-primary w-100" onclick="runCase('lower')">lower case</button></div>
+      <div class="col-6"><button class="btn btn-outline-primary w-100" onclick="runCase('title')">Title Case</button></div>
+      <div class="col-6"><button class="btn btn-outline-primary w-100" onclick="runCase('sentence')">Sentence case</button></div>
+    </div>
+    <div class="result-box mt-3" id="caseResult">
+      <textarea class="form-control" rows="5" id="caseOutput"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('caseOutput')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TTS -->
+<div class="tool-page" id="page-tts">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('tts')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4cc9f0,#4895ef);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-volume-up" style="color:white"></i>
+      </div>
+      <div><h3>Text to Speech</h3><p>Convert text to audio instantly</p></div>
+    </div>
+    <textarea id="ttsInput" class="form-control mb-3" rows="6" placeholder="Enter text to speak..."></textarea>
+    <div class="row g-2 mb-3">
+      <div class="col-6">
+        <label class="form-label">Speed</label>
+        <input type="range" id="ttsRate" class="form-range" min="0.5" max="2" step="0.1" value="1">
+      </div>
+      <div class="col-6">
+        <label class="form-label">Pitch</label>
+        <input type="range" id="ttsPitch" class="form-range" min="0" max="2" step="0.1" value="1">
+      </div>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn-tool btn" onclick="runTTS()">
+        <i class="fas fa-play me-2"></i>Speak
+      </button>
+      <button class="btn btn-outline-danger" onclick="stopTTS()">
+        <i class="fas fa-stop me-2"></i>Stop
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Lorem Ipsum -->
+<div class="tool-page" id="page-lorem">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('lorem')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#4cc9f0,#4895ef);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-paragraph" style="color:white"></i>
+      </div>
+      <div><h3>Lorem Ipsum Generator</h3><p>Generate placeholder text</p></div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Number of Paragraphs</label>
+      <input type="number" id="loremCount" class="form-control" value="3" min="1" max="10">
+    </div>
+    <button class="btn-tool btn" onclick="runLorem()">
+      <i class="fas fa-paragraph me-2"></i>Generate
+    </button>
+    <div class="result-box" id="loremResult">
+      <textarea class="form-control" rows="8" id="loremOutput"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('loremOutput')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- BMI -->
+<div class="tool-page" id="page-bmiCalc">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('bmiCalc')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-weight" style="color:white"></i>
+      </div>
+      <div><h3>BMI Calculator</h3><p>Calculate your Body Mass Index</p></div>
+    </div>
+    <input type="number" id="bmiWeight" class="form-control mb-3" placeholder="Weight (kg)">
+    <input type="number" id="bmiHeight" class="form-control mb-3" placeholder="Height (cm)">
+    <button class="btn-tool btn" onclick="runBMI()">
+      <i class="fas fa-calculator me-2"></i>Calculate BMI
+    </button>
+    <div class="result-box" id="bmiResult">
+      <h4 id="bmiValue"></h4>
+      <p id="bmiCategory"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Age Calculator -->
+<div class="tool-page" id="page-ageCalc">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('ageCalc')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-birthday-cake" style="color:white"></i>
+      </div>
+      <div><h3>Age Calculator</h3><p>Calculate your exact age</p></div>
+    </div>
+    <label class="form-label fw-bold">Date of Birth</label>
+    <input type="date" id="ageDob" class="form-control mb-3">
+    <button class="btn-tool btn" onclick="runAge()">
+      <i class="fas fa-calculator me-2"></i>Calculate Age
+    </button>
+    <div class="result-box" id="ageResult">
+      <h4 id="ageValue"></h4>
+      <p id="ageDays"></p>
+    </div>
+  </div>
+</div>
+
+<!-- EMI Calculator -->
+<div class="tool-page" id="page-emiCalc">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('emiCalc')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-rupee-sign" style="color:white"></i>
+      </div>
+      <div><h3>EMI Calculator</h3><p>Calculate your loan EMI</p></div>
+    </div>
+    <input type="number" id="emiLoan" class="form-control mb-3" placeholder="Loan Amount (₹)">
+    <input type="number" id="emiRate" class="form-control mb-3" placeholder="Interest Rate (%)">
+    <input type="number" id="emiYears" class="form-control mb-3" placeholder="Loan Period (Years)">
+    <button class="btn-tool btn" onclick="runEMI()">
+      <i class="fas fa-calculator me-2"></i>Calculate EMI
+    </button>
+    <div class="result-box" id="emiResult">
+      <div class="row text-center">
+        <div class="col-4">
+          <h5 id="emiMonthly"></h5><p>Monthly EMI</p>
+        </div>
+        <div class="col-4">
+          <h5 id="emiTotal"></h5><p>Total Amount</p>
+        </div>
+        <div class="col-4">
+          <h5 id="emiInterest"></h5><p>Total Interest</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GST Calculator -->
+<div class="tool-page" id="page-gstCalc">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('gstCalc')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-percent" style="color:white"></i>
+      </div>
+      <div><h3>GST Calculator</h3><p>Calculate GST easily</p></div>
+    </div>
+    <input type="number" id="gstAmt" class="form-control mb-3" placeholder="Amount (₹)">
+    <select id="gstRate" class="form-select mb-3">
+      <option value="5">5% GST</option>
+      <option value="12">12% GST</option>
+      <option value="18" selected>18% GST</option>
+      <option value="28">28% GST</option>
+    </select>
+    <button class="btn-tool btn" onclick="runGST()">
+      <i class="fas fa-calculator me-2"></i>Calculate GST
+    </button>
+    <div class="result-box" id="gstResult">
+      <div class="row text-center">
+        <div class="col-4">
+          <h5 id="gstTax"></h5><p>GST Amount</p>
+        </div>
+        <div class="col-4">
+          <h5 id="gstTotal"></h5><p>Total Amount</p>
+        </div>
+        <div class="col-4">
+          <h5 id="gstBase"></h5><p>Base Amount</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Percentage -->
+<div class="tool-page" id="page-percentCalc">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('percentCalc')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#f8961e,#f3722c);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-calculator" style="color:white"></i>
+      </div>
+      <div><h3>Percentage Calculator</h3><p>Calculate percentages easily</p></div>
+    </div>
+    <input type="number" id="pValue" class="form-control mb-3" placeholder="Value">
+    <input type="number" id="pPercent" class="form-control mb-3" placeholder="Percentage %">
+    <button class="btn-tool btn" onclick="runPercent()">
+      <i class="fas fa-calculator me-2"></i>Calculate
+    </button>
+    <div class="result-box" id="percentResult">
+      <h4 id="percentValue2"></h4>
+    </div>
+  </div>
+</div>
+
+<!-- Unit Converter -->
+<div class="tool-page" id="page-unitConv">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('unitConv')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-exchange-alt" style="color:white"></i>
+      </div>
+      <div><h3>Unit Converter</h3><p>Convert between different units</p></div>
+    </div>
+    <select id="unitType" class="form-select mb-3" onchange="updateUnitOptions()">
+      <option value="length">Length</option>
+      <option value="weight">Weight</option>
+      <option value="temp">Temperature</option>
+    </select>
+    <input type="number" id="unitInput" class="form-control mb-3" placeholder="Enter value">
+    <div class="row g-2 mb-3">
+      <div class="col-5">
+        <select id="unitFrom" class="form-select"></select>
+      </div>
+      <div class="col-2 text-center d-flex align-items-center justify-content-center">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+      <div class="col-5">
+        <select id="unitTo" class="form-select"></select>
+      </div>
+    </div>
+    <button class="btn-tool btn" onclick="runUnit()">
+      <i class="fas fa-exchange-alt me-2"></i>Convert
+    </button>
+    <div class="result-box" id="unitResult">
+      <h4 id="unitOutput"></h4>
+    </div>
+  </div>
+</div>
+
+<!-- HEX to RGB -->
+<div class="tool-page" id="page-hexRgb">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('hexRgb')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-palette" style="color:white"></i>
+      </div>
+      <div><h3>HEX to RGB Converter</h3><p>Convert color codes instantly</p></div>
+    </div>
+    <div class="d-flex gap-3 mb-3 align-items-center">
+      <input type="color" id="colorPicker" class="form-control form-control-color" value="#4361ee" style="width:60px;height:50px" oninput="updateHexFromPicker()">
+      <input type="text" id="hexInput2" class="form-control" placeholder="#4361ee">
+    </div>
+    <button class="btn-tool btn" onclick="runHexRgb()">
+      <i class="fas fa-palette me-2"></i>Convert
+    </button>
+    <div class="result-box" id="hexRgbResult">
+      <div class="row text-center">
+        <div class="col-4">
+          <h5 id="hexOut"></h5><p>HEX</p>
+        </div>
+        <div class="col-4">
+          <h5 id="rgbOut"></h5><p>RGB</p>
+        </div>
+        <div class="col-4">
+          <div id="colorPreview" style="width:50px;height:50px;border-radius:10px;margin:auto"></div>
+          <p>Preview</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Base64 -->
+<div class="tool-page" id="page-base64">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('base64')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-code" style="color:white"></i>
+      </div>
+      <div><h3>Base64 Encoder/Decoder</h3><p>Encode or decode Base64 text</p></div>
+    </div>
+    <textarea id="b64Input" class="form-control mb-3" rows="5" placeholder="Enter text here..."></textarea>
+    <div class="d-flex gap-2 mb-3">
+      <button class="btn-tool btn" onclick="runBase64('encode')">
+        <i class="fas fa-lock me-2"></i>Encode
+      </button>
+      <button class="btn btn-outline-primary" style="border-radius:10px;padding:12px 20px;font-weight:700" onclick="runBase64('decode')">
+        <i class="fas fa-lock-open me-2"></i>Decode
+      </button>
+    </div>
+    <div class="result-box" id="base64Result">
+      <textarea class="form-control" rows="5" id="b64Output"></textarea>
+      <button class="btn btn-outline-primary mt-2 btn-sm" onclick="copyText('b64Output')">
+        <i class="fas fa-copy me-1"></i>Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Binary -->
+<div class="tool-page" id="page-binaryDec">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('binaryDec')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-terminal" style="color:white"></i>
+      </div>
+      <div><h3>Binary ↔ Decimal</h3><p>Convert between binary and decimal</p></div>
+    </div>
+    <input type="text" id="binInput2" class="form-control mb-3" placeholder="Enter binary or decimal number">
+    <div class="d-flex gap-2">
+      <button class="btn-tool btn" onclick="runBinary('bin')">Binary → Decimal</button>
+      <button class="btn btn-outline-primary" style="border-radius:10px;padding:12px 20px;font-weight:700" onclick="runBinary('dec')">Decimal → Binary</button>
+    </div>
+    <div class="result-box" id="binaryResult">
+      <h4 id="binOutput"></h4>
+    </div>
+  </div>
+</div>
+
+<!-- Password Generator -->
+<div class="tool-page" id="page-passGen">
+  <div class="tool-page-content">
+    <button class="tool-page-close" onclick="closeTool('passGen')">×</button>
+    <div class="tool-page-header">
+      <div class="tool-icon-wrap" style="background:linear-gradient(135deg,#7b2d8b,#4a1060);width:55px;height:55px;font-size:22px;border-radius:15px;flex-shrink:0">
+        <i class="fas fa-lock" style="color:white"></i>
+      </div>
+      <div><h3>Password Generator</h3><p>Generate strong, secure passwords</p></div>
+    </div>
+    <label class="form-label fw-bold">Length: <span id="passLenVal">12</span></label>
+    <input type="range" id="passLength" class="form-range mb-3" min="6" max="32" value="12" oninput="document.getElementById('passLenVal').innerText=this.value">
+    <div class="row g-2 mb-3">
+      <div class="col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="passUpper" checked>
+          <label class="form-check-label">Uppercase</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="passLower" checked>
+          <label class="form-check-label">Lowercase</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="passNum" checked>
+          <label class="form-check-label">Numbers</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="passSym" checked>
+          <label class="form-check-label">Symbols</label>
+        </div>
+      </div>
+    </div>
+    <button class="btn-tool btn" onclick="runPassGen()">
+      <i class="fas fa-key me-2"></i>Generate Password
+    </button>
+    <div class="result-box" id="passResult">
+      <div class="d-flex gap-2 align-items-center">
+        <h4 id="passOutput" class="mb-0 flex-grow-1" style="word-break:break-all"></h4>
+        <button class="btn btn-outline-primary btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('passOutput').innerText)">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// ============ TOOL OPEN/CLOSE ============
+function openTool(id) {
+  document.getElementById('page-' + id).style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  if(id === 'unitConv') updateUnitOptions();
+}
+function closeTool(id) {
+  document.getElementById('page-' + id).style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+// Close on background click
+document.querySelectorAll('.tool-page').forEach(page => {
+  page.addEventListener('click', function(e) {
+    if(e.target === this) {
+      this.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+});
+
+// ============ SEARCH ============
+function searchTools() {
+  let s = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.tool-item').forEach(t => {
+    t.style.display = t.dataset.name.toLowerCase().includes(s) ? 'block' : 'none';
+  });
+}
+
+// ============ FILTER ============
+function filterTools(cat, el) {
+  document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.tool-item').forEach(t => {
+    t.style.display = (cat === 'all' || t.dataset.cat === cat) ? 'block' : 'none';
+  });
+  document.getElementById('tools').scrollIntoView({behavior:'smooth'});
+}
+
+// ============ DARK MODE ============
+function toggleDark() {
+  document.body.classList.toggle('dark-mode');
+}
+
+// ============ BACK TO TOP ============
+window.onscroll = function() {
+  let btn = document.getElementById('backTop');
+  btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+};
+
+// ============ COPY TEXT ============
+function copyText(id) {
+  let el = document.getElementById(id);
+  el.select();
+  document.execCommand('copy');
+  alert('Copied to clipboard!');
+}
+
+// ============ AI TOOLS ============
+async function callAI(prompt) {
+  try {
+    let res = await fetch("https://YOUR-BACKEND-URL/api/ai", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({prompt: prompt})
+    });
+    let data = await res.json();
+    return data.text;
+  } catch(e) {
+    return "Error: Could not connect to AI. Please check your backend URL.";
+  }
+}
+
+async function runAIPara() {
+  let topic = document.getElementById('aiParaInput').value;
+  let tone = document.getElementById('aiTone').value;
+  document.getElementById('aiParaOutput').value = "Generating...";
+  document.getElementById('aiParaResult').style.display = 'block';
+  let result = await callAI(`Write a ${tone} paragraph about: ${topic}`);
+  document.getElementById('aiParaOutput').value = result;
+}
+
+async function runAISummarize() {
+  let text = document.getElementById('aiSumInput').value;
+  document.getElementById('aiSumOutput').value = "Summarizing...";
+  document.getElementById('aiSumResult').style.display = 'block';
+  let result = await callAI(`Summarize this text in 3-4 sentences: ${text}`);
+  document.getElementById('aiSumOutput').value = result;
+}
+
+async function runAIEmail() {
+  let purpose = document.getElementById('emailPurpose').value;
+  let tone = document.getElementById('emailTone').value;
+  document.getElementById('aiEmailOutput').value = "Writing email...";
+  document.getElementById('aiEmailResult').style.display = 'block';
+  let result = await callAI(`Write a ${tone} email for: ${purpose}`);
+  document.getElementById('aiEmailOutput').value = result;
+}
+
+async function runAIParaphrase() {
+  let text = document.getElementById('paraInput').value;
+  document.getElementById('aiPara2Output').value = "Paraphrasing...";
+  document.getElementById('aiPara2Result').style.display = 'block';
+  let result = await callAI(`Paraphrase this text: ${text}`);
+  document.getElementById('aiPara2Output').value = result;
+}
+
+// ============ SEO TOOLS ============
+function runMetaGen() {
+  let title = document.getElementById('metaTitle').value;
+  let desc = document.getElementById('metaDesc').value;
+  let keys = document.getElementById('metaKeys').value;
+  let author = document.getElementById('metaAuthor').value;
+  let output = `<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>${title}</title>\n<meta name="description" content="${desc}">\n<meta name="keywords" content="${keys}">\n<meta name="author" content="${author}">\n<meta property="og:title" content="${title}">\n<meta property="og:description" content="${desc}">`;
+  document.getElementById('metaGenOutput').value = output;
+  document.getElementById('metaGenResult').style.display = 'block';
+}
+
+function runKeyDensity() {
+  let text = document.getElementById('kdText').value.toLowerCase();
+  let key = document.getElementById('kdKeyword').value.toLowerCase().trim();
+  let words = text.split(/\s+/).filter(w => w);
+  let count = words.filter(w => w === key).length;
+  let density = ((count / words.length) * 100).toFixed(2);
+  document.getElementById('kdOutput').innerHTML = `
+    Keyword "<strong>${key}</strong>" found <strong>${count}</strong> times<br>
+    Density: <strong>${density}%</strong><br>
+    Total Words: <strong>${words.length}</strong>`;
+  document.getElementById('keyDensityResult').style.display = 'block';
+}
+
+function runSlugGen() {
+  let slug = document.getElementById('slugInput').value
+    .toLowerCase().trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-');
+  document.getElementById('slugOutput').innerText = slug;
+  document.getElementById('slugGenResult').style.display = 'block';
+}
+
+function runRobots() {
+  let url = document.getElementById('robotsUrl').value;
+  document.getElementById('robotsOutput').value = `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /private/\nSitemap: ${url}/sitemap.xml`;
+  document.getElementById('robotsGenResult').style.display = 'block';
+}
+
+function runSitemap() {
+  let url = document.getElementById('sitemapUrl').value;
+  let pages = document.getElementById('sitemapPages').value.split('\n').filter(p => p.trim());
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  xml += `  <url>\n    <loc>${url}/</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n`;
+  pages.forEach(page => {
+    xml += `  <url>\n    <loc>${url}${page.trim()}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+  });
+  xml += `</urlset>`;
+  document.getElementById('sitemapOutput').value = xml;
+  document.getElementById('sitemapResult').style.display = 'block';
+}
+
+// ============ IMAGE TOOLS ============
+function runCompress() {
+  let file = document.getElementById('compressFile').files[0];
+  if(!file) return alert('Please select an image');
+  let quality = document.getElementById('qualityRange').value / 100;
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let img = new Image();
+    img.onload = function() {
+      let canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+      canvas.toBlob(function(blob) {
+        let url = URL.createObjectURL(blob);
+        document.getElementById('compressPreview').src = url;
+        document.getElementById('compressDownload').href = url;
+        document.getElementById('compressDownload').download = 'compressed.jpg';
+        document.getElementById('imgCompressResult').style.display = 'block';
+      }, 'image/jpeg', quality);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function runResize() {
+  let file = document.getElementById('resizeFile').files[0];
+  let w = document.getElementById('resizeW').value;
+  let h = document.getElementById('resizeH').value;
+  if(!file || !w || !h) return alert('Please fill all fields');
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let img = new Image();
+    img.onload = function() {
+      let canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      let url = canvas.toDataURL('image/jpeg');
+      document.getElementById('resizePreview').src = url;
+      document.getElementById('resizeDownload').href = url;
+      document.getElementById('resizeDownload').download = 'resized.jpg';
+      document.getElementById('imgResizeResult').style.display = 'block';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function runPngJpg() {
+  let file = document.getElementById('pngFile').files[0];
+  if(!file) return alert('Please select a PNG file');
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let img = new Image();
+    img.onload = function() {
+      let canvas = document.createElement('canvas');
+      canvas.width = img.width; canvas.height = img.height;
+      let ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+      let url = canvas.toDataURL('image/jpeg');
+      document.getElementById('pngPreview').src = url;
+      document.getElementById('pngDownload').href = url;
+      document.getElementById('pngDownload').download = 'converted.jpg';
+      document.getElementById('pngJpgResult').style.display = 'block';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function runImgPdf() {
+  let file = document.getElementById('pdfImgFile').files[0];
+  if(!file) return alert('Please select an image');
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let img = new Image();
+    img.onload = function() {
+      const {jsPDF} = window.jspdf;
+      let pdf = new jsPDF();
+      pdf.addImage(img, 'JPEG', 10, 10, 190, 150);
+      pdf.save('converted.pdf');
+      document.getElementById('imgPdfResult').style.display = 'block';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function runQR() {
+  document.getElementById('qrOutput').innerHTML = '';
+  let text = document.getElementById('qrInput').value;
+  if(!text) return alert('Please enter text or URL');
+  new QRCode(document.getElementById('qrOutput'), {text: text, width: 200, height: 200});
+  setTimeout(() => {
+    let canvas = document.querySelector('#qrOutput canvas');
+    if(canvas) {
+      let url = canvas.toDataURL('image/png');
+      document.getElementById('qrDl').href = url;
+      document.getElementById('qrDl').download = 'qrcode.png';
+    }
+    document.getElementById('qrGenResult').style.display = 'block';
+  }, 500);
+}
+
+function runWatermark() {
+  let file = document.getElementById('wmFile').files[0];
+  let text = document.getElementById('wmText').value;
+  if(!file || !text) return alert('Please fill all fields');
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let img = new Image();
+    img.onload = function() {
+      let canvas = document.createElement('canvas');
+      canvas.width = img.width; canvas.height = img.height;
+      let ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      ctx.font = `${img.width * 0.05}px Arial`;
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.textAlign = 'center';
+      ctx.fillText(text, img.width/2, img.height/2);
+      let url = canvas.toDataURL('image/png');
+      document.getElementById('wmPreview').src = url;
+      document.getElementById('wmDownload').href = url;
+      document.getElementById('wmDownload').download = 'watermarked.png';
+      document.getElementById('watermarkResult').style.display = 'block';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ============ TEXT TOOLS ============
+function runWordCount() {
+  let text = document.getElementById('wcInput').value;
+  let words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  let chars = text.length;
+  let sentences = text.split(/[.!?]+/).filter(s => s.trim()).length;
+  document.getElementById('wcWords').innerText = words;
+  document.getElementById('wcChars').innerText = chars;
+  document.getElementById('wcSentences').innerText = sentences;
+}
+
+function runCase(type) {
+  let text = document.getElementById('caseInput').value;
+  let result = '';
+  if(type === 'upper') result = text.toUpperCase();
+  else if(type === 'lower') result = text.toLowerCase();
+  else if(type === 'title') result = text.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  else if(type === 'sentence') result = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  document.getElementById('caseOutput').value = result;
+  document.getElementById('caseResult').style.display = 'block';
+}
+
+function runTTS() {
+  let text = document.getElementById('ttsInput').value;
+  if(!text) return alert('Please enter text');
+  let utter = new SpeechSynthesisUtterance(text);
+  utter.rate = document.getElementById('ttsRate').value;
+  utter.pitch = document.getElementById('ttsPitch').value;
+  speechSynthesis.speak(utter);
+}
+function stopTTS() { speechSynthesis.cancel(); }
+
+function runLorem() {
+  let count = document.getElementById('loremCount').value;
+  let lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  let result = '';
+  for(let i = 0; i < count; i++) {
+    result += lorem + '\n\n';
+  }
+  document.getElementById('loremOutput').value = result.trim();
+  document.getElementById('loremResult').style.display = 'block';
+}
+
+// ============ CALCULATORS ============
+function runBMI() {
+  let w = document.getElementById('bmiWeight').value;
+  let h = document.getElementById('bmiHeight').value;
+  if(!w || !h) return alert('Please enter weight and height');
+  let bmi = (w / ((h/100) ** 2)).toFixed(1);
+  let cat = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal weight' : bmi < 30 ? 'Overweight' : 'Obese';
+  let color = bmi < 18.5 ? '#ffd60a' : bmi < 25 ? '#06d6a0' : bmi < 30 ? '#f8961e' : '#ef233c';
+  document.getElementById('bmiValue').innerHTML = `BMI: <span style="color:${color}">${bmi}</span>`;
+  document.getElementById('bmiCategory').innerHTML = `Category: <strong style="color:${color}">${cat}</strong>`;
+  document.getElementById('bmiResult').style.display = 'block';
+}
+
+function runAge() {
+  let dob = new Date(document.getElementById('ageDob').value);
+  let today = new Date();
+  let years = today.getFullYear() - dob.getFullYear();
+  let months = today.getMonth() - dob.getMonth();
+  let days = today.getDate() - dob.getDate();
+  if(days < 0) { months--; }
+  if(months < 0) { years--; months += 12; }
+  let totalDays = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
+  document.getElementById('ageValue').innerText = `Age: ${years} Years, ${Math.abs(months)} Months`;
+  document.getElementById('ageDays').innerText = `Total Days: ${totalDays.toLocaleString()} days`;
+  document.getElementById('ageResult').style.display = 'block';
+}
+
+function runEMI() {
+  let p = parseFloat(document.getElementById('emiLoan').value);
+  let r = parseFloat(document.getElementById('emiRate').value) / 1200;
+  let n = parseFloat(document.getElementById('emiYears').value) * 12;
+  if(!p || !r || !n) return alert('Please fill all fields');
+  let emi = (p * r * Math.pow(1+r, n)) / (Math.pow(1+r, n) - 1);
+  let total = emi * n;
+  let interest = total - p;
+  document.getElementById('emiMonthly').innerText = '₹' + emi.toFixed(0).toLocaleString();
+  document.getElementById('emiTotal').innerText = '₹' + total.toFixed(0).toLocaleString();
+  document.getElementById('emiInterest').innerText = '₹' + interest.toFixed(0).toLocaleString();
+  document.getElementById('emiResult').style.display = 'block';
+}
+
+function runGST() {
+  let amt = parseFloat(document.getElementById('gstAmt').value);
+  let rate = parseFloat(document.getElementById('gstRate').value);
+  if(!amt) return alert('Please enter amount');
+  let tax = amt * rate / 100;
+  let total = amt + tax;
+  document.getElementById('gstBase').innerText = '₹' + amt.toFixed(2);
+  document.getElementById('gstTax').innerText = '₹' + tax.toFixed(2);
+  document.getElementById('gstTotal').innerText = '₹' + total.toFixed(2);
+  document.getElementById('gstResult').style.display = 'block';
+}
+
+function runPercent() {
+  let val = document.getElementById('pValue').value;
+  let pct = document.getElementById('pPercent').value;
+  let result = (val * pct / 100).toFixed(2);
+  document.getElementById('percentValue2').innerText = `${pct}% of ${val} = ${result}`;
+  document.getElementById('percentResult').style.display = 'block';
+}
+
+// ============ CONVERTERS ============
+const unitData = {
+  length: {
+    units: ['Meter', 'Kilometer', 'Mile', 'Yard', 'Foot', 'Inch', 'Centimeter'],
+    toMeter: [1, 1000, 1609.34, 0.9144, 0.3048, 0.0254, 0.01]
+  },
+  weight: {
+    units: ['Kilogram', 'Gram', 'Pound', 'Ounce', 'Ton'],
+    toKg: [1, 0.001, 0.453592, 0.0283495, 1000]
+  },
+  temp: {units: ['Celsius', 'Fahrenheit', 'Kelvin']}
+};
+
+function updateUnitOptions() {
+  let type = document.getElementById('unitType').value;
+  let units = unitData[type].units;
+  let from = document.getElementById('unitFrom');
+  let to = document.getElementById('unitTo');
+  from.innerHTML = to.innerHTML = '';
+  units.forEach(u => {
+    from.innerHTML += `<option>${u}</option>`;
+    to.innerHTML += `<option>${u}</option>`;
+  });
+}
+
+function runUnit() {
+  let type = document.getElementById('unitType').value;
+  let val = parseFloat(document.getElementById('unitInput').value);
+  let from = document.getElementById('unitFrom').value;
+  let to = document.getElementById('unitTo').value;
+  let result;
+
+  if(type === 'temp') {
+    if(from === 'Celsius' && to === 'Fahrenheit') result = (val * 9/5) + 32;
+    else if(from === 'Celsius' && to === 'Kelvin') result = val + 273.15;
+    else if(from === 'Fahrenheit' && to === 'Celsius') result = (val - 32) * 5/9;
+    else if(from === 'Fahrenheit' && to === 'Kelvin') result = (val - 32) * 5/9 + 273.15;
+    else if(from === 'Kelvin' && to === 'Celsius') result = val - 273.15;
+    else if(from === 'Kelvin' && to === 'Fahrenheit') result = (val - 273.15) * 9/5 + 32;
+    else result = val;
+  } else {
+    let data = type === 'length' ? unitData.length : unitData.weight;
+    let key = type === 'length' ? 'toMeter' : 'toKg';
+    let fromIdx = data.units.indexOf(from);
+    let toIdx = data.units.indexOf(to);
+    let base = val * data[key][fromIdx];
+    result = base / data[key][toIdx];
+  }
+
+  document.getElementById('unitOutput').innerText = `${val} ${from} = ${result.toFixed(4)} ${to}`;
+  document.getElementById('unitResult').style.display = 'block';
+}
+
+function updateHexFromPicker() {
+  document.getElementById('hexInput2').value = document.getElementById('colorPicker').value;
+}
+
+function runHexRgb() {
+  let hex = document.getElementById('hexInput2').value.replace('#', '');
+  if(hex.length !== 6) return alert('Enter valid HEX code');
+  let r = parseInt(hex.substring(0, 2), 16);
+  let g = parseInt(hex.substring(2, 4), 16);
+  let b = parseInt(hex.substring(4, 6), 16);
+  document.getElementById('hexOut').innerText = '#' + hex;
+  document.getElementById('rgbOut').innerText = `rgb(${r},${g},${b})`;
+  document.getElementById('colorPreview').style.background = '#' + hex;
+  document.getElementById('hexRgbResult').style.display = 'block';
+}
+
+function runBase64(type) {
+  let text = document.getElementById('b64Input').value;
+  try {
+    document.getElementById('b64Output').value = type === 'encode' ? btoa(text) : atob(text);
+    document.getElementById('base64Result').style.display = 'block';
+  } catch(e) {
+    alert('Invalid input for decoding');
+  }
+}
+
+function runBinary(type) {
+  let val = document.getElementById('binInput2').value.trim();
+  let result = type === 'bin' ? parseInt(val, 2) : parseInt(val).toString(2);
+  document.getElementById('binOutput').innerText = result;
+  document.getElementById('binaryResult').style.display = 'block';
+}
+
+function runPassGen() {
+  let len = document.getElementById('passLength').value;
+  let chars = '';
+  if(document.getElementById('passUpper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(document.getElementById('passLower').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+  if(document.getElementById('passNum').checked) chars += '0123456789';
+  if(document.getElementById('passSym').checked) chars += '!@#$%^&*()_+-=[]{}';
+  if(!chars) return alert('Select at least one option');
+  let pass = '';
+  for(let i = 0; i < len; i++) pass += chars[Math.floor(Math.random() * chars.length)];
+  document.getElementById('passOutput').innerText = pass;
+  document.getElementById('passResult').style.display = 'block';
+}
+
+// Contact Form
+function sendContact() {
+  let name = document.getElementById('cName').value;
+  let email = document.getElementById('cEmail').value;
+  let msg = document.getElementById('cMsg').value;
+  if(!name || !email || !msg) return alert('Please fill all fields');
+  document.getElementById('contactResult').innerHTML = `
+    <i class="fas fa-check-circle me-2"></i>Thank you ${name}! Message sent successfully.`;
+  document.getElementById('cName').value = '';
+  document.getElementById('cEmail').value = '';
+  document.getElementById('cMsg').value = '';
+}
+</script>
